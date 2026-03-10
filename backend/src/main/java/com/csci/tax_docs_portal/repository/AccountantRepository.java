@@ -98,8 +98,8 @@ public class AccountantRepository {
     params.addValue("firstName", accountant.getFirstName());
     params.addValue("lastName", accountant.getLastName());
     params.addValue("email", accountant.getEmail());
-    params.addValue("weight", accountant.getUsername());
-    params.addValue("smoker", accountant.getPasswordHash());
+    params.addValue("username", accountant.getUsername());
+    params.addValue("password", accountant.getPasswordHash());
 
     jdbc.update(sql, params);
 
