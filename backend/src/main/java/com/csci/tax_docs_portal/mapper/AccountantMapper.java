@@ -10,18 +10,14 @@ public class AccountantMapper {
 
   public Accountant mapRowSetToAccountant(SqlRowSet rowSet) {
     rowSet.first();
-
-    Accountant accountant = this.mapRowSetEntryToAccountant(rowSet);
-
-    return accountant;
+    return this.mapRowSetEntryToAccountant(rowSet);
   }
 
   public List<Accountant> mapRowSetToAccountants(SqlRowSet rowSet) {
-    List<Accountant> accountants = new ArrayList<Accountant>();
+    List<Accountant> accountants = new ArrayList<>();
 
     while (rowSet.next()) {
-      Accountant accountants = this.mapRowSetEntryToAccountant(rowSet);
-
+      Accountant accountant = this.mapRowSetEntryToAccountant(rowSet);
       accountants.add(accountant);
     }
 
@@ -35,7 +31,7 @@ public class AccountantMapper {
         .lastName(rowSet.getString("last_name"))
         .email(rowSet.getString("email"))
         .username(rowSet.getString("username"))
-        .password(rowSet.getString("password_hash"))
+        .passwordHash(rowSet.getString("password_hash"))
         .build();
   }
 }

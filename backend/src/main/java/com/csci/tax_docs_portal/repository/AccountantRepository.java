@@ -1,7 +1,7 @@
 package com.csci.tax_docs_portal.repository;
 
-import com.csci.tax_docs_portal.entity.User;
-import com.csci.tax_docs_portal.mapper.UserMapper;
+import com.csci.tax_docs_portal.entity.Accountant;
+import com.csci.tax_docs_portal.mapper.AccountantMapper;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -20,28 +20,28 @@ public class AccountantRepository {
 
   public AccountantRepository(NamedParameterJdbcTemplate jdbc) {
     this.jdbc = jdbc;
-    this.mapper = new UserMapper();
+    this.mapper = new AccountantMapper();
   }
 
-  public List<User> findAll() {
+  public List<Accountant> findAll() {
     String sql = """
         SELECT *
-        FROM users
+        FROM accountants
         """;
 
     MapSqlParameterSource params = new MapSqlParameterSource();
 
     SqlRowSet results = jdbc.queryForRowSet(sql, params);
 
-    List<Accountant> users = this.mapper.mapRowSetToUsers(results);
+    List<Accountant> accountants = this.mapper.mapRowSetToAccountants(results);
 
-    return users;
+    return accountants;
   }
 
   public Accountant findById(UUID id) {
     String sql = """
         SELECT *
-        FROM users
+        FROM accountants
         WHERE id = :id
         """;
 
@@ -50,23 +50,24 @@ public class AccountantRepository {
 
     SqlRowSet results = jdbc.queryForRowSet(sql, params);
 
-    User user = this.mapper.mapRowSetToUser(results);
+    Accountant accountant = this.mapper.mapRowSetToAccountant(results);
 
-    return user;
+    return accountant;
   }
 
-  public User create(User user) {
-    String sql = """
-        INSERT INTO users (first_name, last_name, age, weight, smoker)
-        VALUES (:firstName, :lastName, :age, :weight, :smoker)
-        """;
+  public Accountant create(Accountant accountant) {
+    String sql =
+        """
+            INSERT INTO accountants (first_name, last_name, email, username, password_hash)
+            VALUES (:firstName, :lastName, :email, :username, :password)
+            """;
 
     MapSqlParameterSource params = new MapSqlParameterSource();
-    params.addValue("firstName", user.getFirstName());
-    params.addValue("lastName", user.getLastName());
-    params.addValue("age", user.getAge());
-    params.addValue("weight", user.getWeight());
-    params.addValue("smoker", user.isSmoker());
+    params.addValue("firstName", accountant.getFirstName());
+    params.addValue("lastName", accountant.getLastName());
+    params.addValue("email", accountant.getEmail());
+    params.addValue("username", accountant.getUsername());
+    params.addValue("password", accountant.getPasswordHash());
 
     KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -76,38 +77,38 @@ public class AccountantRepository {
 
     UUID id = keyHolder.getKeyAs(UUID.class);
 
-    user.setId(id);
+    accountant.setId(id);
 
-    return user;
+    return accountant;
   }
 
-  public User update(User user) {
+  public Accountant update(Accountant accountant) {
     String sql = """
-        update users
+        update accountants
         set first_name = :firstName,
           last_name = :lastName,
-          age = :age,
-          weight = :weight,
-          smoker = :smoker
+          email = :email,
+          username = :username,
+          password_hash = :password
         where id = :id
         """;
 
     MapSqlParameterSource params = new MapSqlParameterSource();
-    params.addValue("id", user.getId());
-    params.addValue("firstName", user.getFirstName());
-    params.addValue("lastName", user.getLastName());
-    params.addValue("age", user.getAge());
-    params.addValue("weight", user.getWeight());
-    params.addValue("smoker", user.isSmoker());
+    params.addValue("id", accountant.getId());
+    params.addValue("firstName", accountant.getFirstName());
+    params.addValue("lastName", accountant.getLastName());
+    params.addValue("email", accountant.getEmail());
+    params.addValue("weight", accountant.getUsername());
+    params.addValue("smoker", accountant.getPasswordHash());
 
     jdbc.update(sql, params);
 
-    return user;
+    return accountant;
   }
 
   public boolean destroy(UUID id) {
     String sql = """
-        DELETE FROM users
+        DELETE FROM accountants
         WHERE id = :id
         """;
 

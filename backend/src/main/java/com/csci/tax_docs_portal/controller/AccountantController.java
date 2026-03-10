@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/accountants")
 @CrossOrigin(origins = "*")
 @Slf4j
-public class AccountantrController {
+public class AccountantController {
 
   private final AccountantService accountantService;
 
@@ -32,7 +32,7 @@ public class AccountantrController {
 
   @GetMapping
   public ResponseEntity<List<Accountant>> index() {
-    log.info("[AccountantrController#index]");
+    log.info("[AccountantController#index]");
 
     List<Accountant> response = this.accountantService.list();
 
