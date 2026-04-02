@@ -5,6 +5,7 @@
 
 import { User } from '../models/user';
 import { Accountant } from '../models/accountant';
+import { Client} from '../models/client'
 
 export default class ApiAccessor {
 
@@ -75,19 +76,76 @@ export default class ApiAccessor {
       { method: 'GET' }
     );
 
-  const data: Accountant[] = await response.json();
+    const data: Accountant[] = await response.json();
     return data;
   }
 
-    public async getAccountant(accountantId: string): Promise<Accountant> {
+  public async getAccountant(accountantId: string): Promise<Accountant> {
     const response = await fetch(
       `${this.API_URL}/accountants/${accountantId}`,
       { method: 'GET' }
     );
 
     const data: Accountant = await response.json();
+    return data;
+  }
+  
+  public async listClients(): Promise<Client[]> {
+    const response = await fetch(
+      `${this.API_URL}/clients`,
+      { method: 'GET' }
+    );
+
+    const data: Client[] = await response.json();
 
     return data;
   }
 
+  public async getClient(clientId: string): Promise<Client> {
+    const response = await fetch(
+      `${this.API_URL}/clients/${clientId}`,
+      { method: 'GET' }
+    );
+
+    const data: Client = await response.json();
+
+    return data;
+  }
+
+  public async createClient(client: Client): Promise<Client> {
+    const response = await fetch(`${this.API_URL}/clients`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(client)
+    });
+
+    const data: Client = await response.json();
+
+    return data;
+  }
+
+  public async updateClient(client: Client): Promise<Client> {
+    const response = await fetch(`${this.API_URL}/clients/${client.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(client)
+    });
+
+    const data: Client = await response.json();
+
+    return data;
+  }
+
+  public async destroyClient(clientId: string): Promise<boolean> {
+    const response = await fetch(
+      `${this.API_URL}/clients/${clientId}`,
+      { method: 'DELETE' }
+    );
+
+    return (response.status == 204);
+  }
 }
