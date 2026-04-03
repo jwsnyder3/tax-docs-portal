@@ -18,6 +18,7 @@ import NewClient from './pages/clients/NewClient.tsx';
 import EditClient from './pages/clients/EditClient.tsx'; 
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
+import AccountantHome from './pages/accountants/AccountantHome.tsx';
 
 const rootElement = document.getElementById("root");
 
@@ -63,6 +64,10 @@ createRoot(rootElement).render(
           
           <Route path="clientIndex">
             <Route index element={<ClientIndex />} />
+          </Route>
+
+          <Route path="accountant-home">
+            <Route index element={<AccountantHome />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
