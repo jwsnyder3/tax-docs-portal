@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { User } from '../models/user';
+import { Accountant } from '../models/accountant';
 import { Client} from '../models/client'
 
 export default class ApiAccessor {
@@ -69,6 +70,26 @@ export default class ApiAccessor {
     return (response.status == 204);
   }
 
+  public async listAccountants(): Promise<Accountant[]> {
+    const response = await fetch(
+      `${this.API_URL}/accountants`,
+      { method: 'GET' }
+    );
+
+    const data: Accountant[] = await response.json();
+    return data;
+  }
+
+  public async getAccountant(accountantId: string): Promise<Accountant> {
+    const response = await fetch(
+      `${this.API_URL}/accountants/${accountantId}`,
+      { method: 'GET' }
+    );
+
+    const data: Accountant = await response.json();
+    return data;
+  }
+  
   public async listClients(): Promise<Client[]> {
     const response = await fetch(
       `${this.API_URL}/clients`,

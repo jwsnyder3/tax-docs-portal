@@ -9,6 +9,8 @@ import Users from './pages/users/Users.tsx';
 import User from './pages/users/User.tsx';
 import NewUser from './pages/users/NewUser.tsx';
 import EditUser from './pages/users/EditUser.tsx';
+import Accountants from './pages/accountants/Accountants.tsx';
+import Accountant from './pages/accountants/Accountant.tsx';
 import Clients from './pages/clients/Clients.tsx';
 import ClientIndex from './pages/clients/ClientIndex.tsx';
 import Client from './pages/clients/Client.tsx';
@@ -41,6 +43,11 @@ createRoot(rootElement).render(
               <Route path="edit" element={<EditUser />} />
             </Route>
           </Route>
+  
+          <Route path="accountants">
+            <Route index element={<Accountants />} />
+            <Route path=":accountantId" element={<Accountant />} />
+            </Route>
 
           <Route path="clients">
             <Route index element={<Clients />} />
