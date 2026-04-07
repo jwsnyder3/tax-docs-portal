@@ -1,8 +1,6 @@
 import "./App.css";
 import { Outlet } from "react-router";
-import { Container, CssBaseline, Stack, ThemeProvider } from "@mui/material";
-// import Footer from './components/layout/footer';
-import NavbarTop from "./components/layout/navbar-top";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ProjectTheme } from "./ProjectTheme";
 
 export default function App() {
@@ -10,15 +8,8 @@ export default function App() {
     <ThemeProvider theme={ProjectTheme}>
       <CssBaseline />
 
-      <Stack sx={{ height: "100vh" }}>
-        <NavbarTop />
+      <Outlet />
 
-        <Container component="main" sx={{ pt: 3 }}>
-          <Outlet />
-        </Container>
-
-        {/* <Footer /> */}
-      </Stack>
     </ThemeProvider>
   );
 }

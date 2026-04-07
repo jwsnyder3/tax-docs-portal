@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -17,7 +17,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 } */
 
-/* #root {
+#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -58,4 +58,4 @@ body {
 
 .read-the-docs {
   color: #888;
-} */
+}
