@@ -11,6 +11,8 @@ import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ClientDashboard from "./pages/clients/ClientDashboard.tsx";
 import ClientAccount from "./pages/clients/ClientAccount.tsx";
+import AccountantHome from './pages/accountants/AccountantHome.tsx';
+import AccountantMessageBoard from './pages/accountants/AccountantMessageBoard.tsx';
 import ClientMessages from "./pages/clients/ClientMessages.tsx";
 import ClientTasks from "./pages/clients/ClientTasks.tsx";
 import AppAdmin from "./AppAdmin.tsx";
@@ -83,6 +85,10 @@ createRoot(rootElement).render(
 
           <Route path="clientIndex" element={<ClientIndex />} />
           <Route path="accountant-home" element={<AccountantHome />} />
+
+          <Route path="accountant-message-board">
+            <Route index element={<AccountantMessageBoard />} />
+          </Route>
 
           <Route path="*" element={<NotFound />} />
           */}
