@@ -13,8 +13,8 @@ interface NavPage {
 }
 
 const pages: NavPage[] = [
-  { name: 'About', path: '/' },
-  { name: 'Contact', path: '/contact-us' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
   { name: 'Services', path: '/services' }
 ];
 
@@ -53,7 +53,7 @@ export default function BrochureNav() {
               textDecoration: "none"
             }}
           >
-            Tax Strategists of America
+            STAbill
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -87,7 +87,7 @@ export default function BrochureNav() {
                 sx={{ my: 2, color: "black", display: "block",
                     borderRadius: 2, border: 2, borderColor: "black" }}
                 component={Link}
-                to={"/app/login"}
+                to={"/login"}
                 >
                 Login
             </Button>
@@ -98,7 +98,7 @@ export default function BrochureNav() {
                 sx={{ my: 2, color: "white", display: "block",
                     borderRadius: 2, border: 2, borderColor: "black" }}
                 component={Link}
-                to={"/app/register"}
+                to={"/register"}
                 >
                 Sign Up
             </Button>
