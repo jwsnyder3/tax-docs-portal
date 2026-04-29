@@ -34,100 +34,43 @@ const bottomAction: Record<NavVariant, BottomAction> = {
 
 const navLinks: Record<NavVariant, NavPage[]> = {
   brochure: [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "About",
-      path: "/about",
-    },
-    {
-      name: "Contact",
-      path: "/contact",
-    },
-    {
-      name: "Services",
-      path: "/services",
-    },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Services", path: "/services" },
   ],
 
   login: [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "About",
-      path: "/about",
-    },
-    {
-      name: "Contact",
-      path: "/contact",
-    },
-    {
-      name: "Services",
-      path: "/services",
-    }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Services", path: "/services" },
   ],
 
   client: [
-    {
-      name: "Home",
-      path: "/app/client",
-    },
-    {
-      name: "Messages",
-      path: "/app/client/messages",
-    },
-    {
-      name: "Tasks",
-      path: "/app/client/tasks",
-    },
-    {
-      name: "Documents",
-      path: "/app/client/documents",
-    },
+    { name: "Home", path: "/app/client" },
+    { name: "Messages", path: "/app/client/messages" },
+    { name: "Tasks", path: "/app/client/tasks" },
+    { name: "Documents", path: "/app/client/documents" },
   ],
 
   accountant: [
-  {
-    name: "Home",
-    path: "/app/accountant",
-  },
-  {
-    name: "View Clients",
-    path: "/app/accountant/clients",
-  }
-],
+    { name: "Home", path: "/app/accountant" },
+    { name: "View Clients", path: "/app/accountant/clients" },
+  ],
 
   admin: [
-    {
-      name: "Home",
-      path: "/admin",
-    },
-    {
-      name: "Accountants",
-      path: "/admin/accountants",
-    },
-    {
-      name: "Clients",
-      path: "/admin/clients",
-    },
-    {
-      name: "Admins",
-      path: "/admin/admins",
-    },
+    { name: "Home", path: "/admin" },
+    { name: "Accountants", path: "/admin/accountants" },
+    { name: "Clients", path: "/admin/clients" },
+    { name: "Admins", path: "/admin/admins" },
   ],
 };
 
 export default function ModularNav({ variant }: { variant: NavVariant }) {
   const { clientId } = useParams();
-
   const location = useLocation();
-
   const navigate = useNavigate();
-
   const { user, logout } = useAuth();
 
   const [assignedClients, setAssignedClients] = useState<Client[]>([]);
@@ -139,7 +82,6 @@ export default function ModularNav({ variant }: { variant: NavVariant }) {
       }
 
       const result = await apiAccessor.getClientsByAccountant(user.id);
-
       setAssignedClients(result);
     }
 
@@ -150,32 +92,16 @@ export default function ModularNav({ variant }: { variant: NavVariant }) {
 
   if (variant === "accountant" && clientId) {
     pages = [
-      {
-        name: "Back To Clients",
-        path: "/app/accountant/clients",
-      },
-      {
-        name: "Client Home",
-        path: `/app/accountant/clients/${clientId}`,
-      },
-      {
-        name: "Messages",
-        path: `/app/accountant/clients/${clientId}/messages`,
-      },
-      {
-        name: "View Tasks",
-        path: `/app/accountant/clients/${clientId}/tasks`,
-      },
-      {
-        name: "Documents",
-        path: `/app/accountant/clients/${clientId}/documents`,
-      },
+      { name: "Back To Clients", path: "/app/accountant/clients" },
+      { name: "Client Home", path: `/app/accountant/clients/${clientId}` },
+      { name: "Messages", path: `/app/accountant/clients/${clientId}/messages` },
+      { name: "View Tasks", path: `/app/accountant/clients/${clientId}/tasks` },
+      { name: "Documents", path: `/app/accountant/clients/${clientId}/documents` },
     ];
   }
 
   const handleLogout = (): void => {
     logout();
-
     void navigate("/");
   };
 
@@ -264,30 +190,28 @@ export default function ModularNav({ variant }: { variant: NavVariant }) {
           </Button>
         ))}
 
-        {variant === "accountant" &&
-          !clientId &&
-          assignedClients.length > 0 && (
-            <>
-              <Divider />
+        {variant === "accountant" && !clientId && assignedClients.length > 0 && (
+          <>
+            <Divider />
 
-              {assignedClients.map((client) => (
-                <Button
-                  key={client.id}
-                  component={Link}
-                  to={`/app/accountant/clients/${client.id ?? ''}`}
-                  fullWidth
-                  sx={{
-                    color: "black",
-                    justifyContent: "flex-start",
-                    textAlign: "left",
-                    px: 2,
-                  }}
-                >
-                  {client.firstName} {client.lastName}
-                </Button>
-              ))}
-            </>
-          )}
+            {assignedClients.map((client) => (
+              <Button
+                key={client.id}
+                component={Link}
+                to={`/app/accountant/clients/${client.id ?? ""}`}
+                fullWidth
+                sx={{
+                  color: "black",
+                  justifyContent: "flex-start",
+                  textAlign: "left",
+                  px: 2,
+                }}
+              >
+                {client.firstName} {client.lastName}
+              </Button>
+            ))}
+          </>
+        )}
       </Box>
 
       <Box
